@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador de transporte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Organizador de transporte</h1>
+    <form method="post">
+        <label for="custo_carro">Custo com Carro Uber (Diário total ida e volta em reais):</label>
+        <input type="number" step="0.01" id="custo_carro" name="custo_carro" required><br>
+
+        <label for="custo_moto">Custo com Moto Uber (Diário total ida e volta em reais):</label>
+        <input type="number" step="0.01" id="custo_moto" name="custo_moto" required><br>
+
+        <label for="custo_bus">Custo com Ônibus (Diário total ida e volta em reais):</label>
+        <input type="number" step="0.01" id="custo_bus" name="custo_bus" required><br>
+
+        <label for="tempo_carro">Tempo com Carro Uber (Diário total ida e volta em minutos):</label>
+        <input type="number" step="0.01" id="tempo_carro" name="tempo_carro" required><br>
+
+        <label for="tempo_moto">Tempo com Moto Uber (Diário total ida e volta em minutos):</label>
+        <input type="number" step="0.01" id="tempo_moto" name="tempo_moto" required><br>
+
+        <label for="tempo_bus">Tempo com Ônibus (Diário total ida e volta em minutos):</label>
+        <input type="number" step="0.01" id="tempo_bus" name="tempo_bus" required><br>
+
+        <label for="conforto_carro">Conforto Carro Uber(Nota pessoal de 1 a 5):</label>
+        <input type="number" step="0.01" id="conforto_carro" name="conforto_carro" required><br>
+
+        <label for="conforto_moto">Conforto Moto Uber(Nota pessoal de 1 a 5):</label>
+        <input type="number" step="0.01" id="conforto_moto" name="conforto_moto" required><br>
+
+        <label for="conforto_bus">Conforto Ônibus(Nota pessoal de 1 a 5):</label>
+        <input type="number" step="0.01" id="conforto_bus" name="conforto_bus" required><br>
+
+        <label for="limite_custo">Limite de Custo(Quanto você planeja gastar ao máximo no mês com transporte em reais):</label>
+        <input type="number" step="0.01" id="limite_custo" name="limite_custo" required><br>
+
+        <label for="limite_tempo">Limite de Tempo (Qual o máximo de tempo em minutos no mês você pretende gastar se transportando):</label>
+        <input type="number" step="0.01" id="limite_tempo" name="limite_tempo" required><br>
+
+        <label for="min_dias">Mínimo de Dias(Dias úteis, geralmente de 22 a 26):</label>
+        <input type="number" id="min_dias" name="min_dias" required><br>
+
+        <input type="submit" value="Calcular">
+    </form>
+
+    {% if resultado %}
+    <footer>
+        <div class="resultados">
+            <p>Status: {{ resultado.status }}</p>
+            <p>Carro Uber: {{ resultado.carro_uber }} dias</p>
+            <p>Moto Uber: {{ resultado.moto_uber }} dias</p>
+            <p>Ônibus: {{ resultado.bus }} dias</p>
+            <p>Conforto Total: {{ resultado.conforto_total }}</p>
+            <p>Custo Total: {{ resultado.custo_total }}</p>
+            <p>Tempo Total: {{ resultado.tempo_total }}</p>
+            <p>Saldo de Tempo: {{ resultado.saldo_tempo }}</p>
+            <p>Saldo de Custo: {{ resultado.saldo_custo }}</p>
+            <p>Média de Conforto: {{ resultado.media_conforto }}</p>
+            <p> Se status for OPTIMAL, a solução foi encontrada.<br>
+            <p> Se status for INFEASIBLE, não foi possível encontrar um resultado ótimo <br>que atendesse as restrições, tente novamente com novos dados.<p>
+        </div>
+
+        <div class="dados-inseridos">
+            <p><strong>Dados inseridos:</strong></p>
+            <p>Custo Carro Uber: {{ resultado.dados_inseridos.custo_carro }}</p>
+            <p>Custo Moto Uber: {{ resultado.dados_inseridos.custo_moto }}</p>
+            <p>Custo Ônibus: {{ resultado.dados_inseridos.custo_bus }}</p>
+            <p>Tempo Carro Uber: {{ resultado.dados_inseridos.tempo_carro }}</p>
+            <p>Tempo Moto Uber: {{ resultado.dados_inseridos.tempo_moto }}</p>
+            <p>Tempo Ônibus: {{ resultado.dados_inseridos.tempo_bus }}</p>
+            <p>Conforto Carro Uber: {{ resultado.dados_inseridos.conforto_carro }}</p>
+            <p>Conforto Moto Uber: {{ resultado.dados_inseridos.conforto_moto }}</p>
+            <p>Conforto Ônibus: {{ resultado.dados_inseridos.conforto_bus }}</p>
+            <p>Limite de Custo: {{ resultado.dados_inseridos.limite_custo }}</p>
+            <p>Limite de Tempo: {{ resultado.dados_inseridos.limite_tempo }}</p>
+            <p>Mínimo de Dias: {{ resultado.dados_inseridos.min_dias }}</p>
+        </div>
+    </footer>
+    {% endif %}
+</body>
+</html>
